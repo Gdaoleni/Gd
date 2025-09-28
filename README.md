@@ -1,40 +1,40 @@
-# godot-cpp template
-This repository serves as a quickstart template for GDExtension development with Godot 4.0+.
+# godot-cpp 模板
+这个仓库是用于 Godot 4.0+ 的 GDExtension 开发的快速入门模板。
 
-## Contents
-* An empty Godot project (`demo/`)
-* godot-cpp as a submodule (`godot-cpp/`)
-* GitHub Issues template (`.github/ISSUE_TEMPLATE.yml`)
-* GitHub CI/CD workflows to publish your library packages when creating a release (`.github/workflows/builds.yml`)
-* preconfigured source files for C++ development of the GDExtension (`src/`)
-* setup to automatically generate `.xml` files in a `doc_classes/` directory to be parsed by Godot as [GDExtension built-in documentation](https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_docs_system.html)
+## 内容
+* 一个空的Godot项目 (`demo/`)
+* godot-cpp作为一个子模块 (`godot-cpp/`)
+* GitHub Issues 模板 (`.github/ISSUE_TEMPLATE.yml`)
+* GitHub CI/CD 工作流：在创建 Release 时自动发布你的库包（.github/workflows/builds.yml）
+* 预置的C++源码文件: 用于开发GDExtension(位于src/目录)
+* 自动生成设置:会在doc_classes/目录下生成.xml文件，供Godot解析为 GDExtension内置文档
 
-## Usage - Template
+## 用法 - 模板
 
-To use this template, log in to GitHub and click the green "Use this template" button at the top of the repository page.
-This will let you create a copy of this repository with a clean git history. Make sure you clone the correct branch as these are configured for development of their respective Godot development branches and differ from each other. Refer to the docs to see what changed between the versions.
+要使用此模板，请登录 GitHub 并在仓库页面顶部点击绿色的“使用此模板”按钮。(创建这个仓库的分支)
+这将让您创建此仓库的副本，且具有干净的 Git 历史记录。请确保克隆正确的分支，因为这些分支针对各自的 Godot 开发分支进行了配置，并且彼此不同。请参考文档以了解各版本之间的差异。
 
-For getting started after cloning your own copy to your local machine, you should: 
-* initialize the godot-cpp git submodule via `git submodule update --init`
-* change the name of your library
-  * change the name of the compiled library file inside the `SConstruct` file by modifying the `libname` string.
-  * change the pathnames of the to be loaded library name inside the `demo/bin/example.gdextension` file. By replacing `EXTENSION-NAME` only to the name specified in your `SConstruct` file.
-  * change the name of the `demo/bin/example.gdextension` file
-* change the `entry_symbol` string inside your `demo/bin/your-extension.gdextension` file to be configured for your GDExtension name. This should be the same as the `GDExtensionBool GDE_EXPORT` external C function. As the name suggests, this sets the entry function for your GDExtension to be loaded by the Godot editors C API.
-* register the classes you want Godot to interact with inside the `register_types.cpp` file in the initialization method (here `initialize_gdextension_types`) in the syntax `GDREGISTER_CLASS(CLASS-NAME);`.
+在将自己的分支克隆到本地之后，您应该开始：
+* 通过 `git submodule update --init` 初始化git子模块
+* 更改动态库的名字
+  * 通过修改“libname”字符串来改变“SConstruct”文件中编译的动态库文件的名称。
+  * 可以在项目路径的demo/bin/example.gdextension文件中修改各个平台要加载的动态库的路径名，里面的"EXTENSION-NAME"字段需要替换为"SConstruct"文件中指定的名称。
+  * 更改这个 `demo/bin/example.gdextension` 文件的名称
+* 你可以修改"demo/bin/example.gdextension"文件中的entry_symbol字段对应的内容,使其与你的GDExtension项目中export "c"块中的"GDExtensionBool GDE_EXPORT"修饰符的函数名称相匹配,这个决定了你的GDExtension的入口函数(或者说是加载函数),使其能够被Godot编辑器的C API加载
+* 在register_types.cpp文件中的初始化方法(initialize_gdextension_types)中, 使用GDREGISTER_CLASS(CLASS_NAME);来注册你自己实现的类
 
-### Configuring an IDE 
-You can develop your own extension with any text editor and by invoking scons on the command line, but if you want to work with an IDE (Integrated Development Environment), you can use a compilation database file called `compile_commands.json`. Most IDEs should automatically identify this file, and self-configure appropriately.
-To generate the database file, you can run one of the following commands in the project root directory:
+### 配置集成开发环境
+你可以使用任何文本编辑器编写扩展，并通过命令行调用 SCons 进行构建；但如果想借助 IDE（集成开发环境），只需提供一个名为 compile_commands.json 的编译数据库文件。大多数 IDE 会自动识别该文件并完成相应的配置
+要在项目根目录生成该数据库文件，可运行以下任一命令:
 ```shell
-# Generate compile_commands.json while compiling
+# 在编译的同时生成 compile_commands.json
 scons compiledb=yes
 
-# Generate compile_commands.json without compiling
+# 仅生成 compile_commands.json，不进行编译
 scons compiledb=yes compile_commands.json
 ```
 
-## Usage - Actions
+## 用法 - Actions
 
-This repository comes with a GitHub action that builds the GDExtension for cross-platform use. It triggers automatically for each pushed change. You can find and edit it in [builds.yml](.github/workflows/builds.yml).
-After a workflow run is complete, you can find the file `godot-cpp-template.zip` on the `Actions` tab on GitHub.
+本仓库已内置 GitHub Action，可跨平台构建 GDExtension，并在每次推送时自动触发。你可前往 .github/workflows/builds.yml 查看或修改配置。
+工作流运行结束后，可在 GitHub 的 Actions 标签页中下载生成的 godot-cpp-template.zip 文件。
