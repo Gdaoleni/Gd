@@ -20,7 +20,7 @@
   * 可以通过修改`libname`字符串来改变`SConstruct`文件中编译的动态库文件的名称。
   * 可以在项目路径的demo/bin/example.gdextension文件中修改各个平台要加载的动态库的路径名，里面的`EXTENSION-NAME`字段需要替换为`SConstruct`文件中指定的名称。
   * 可以更改这个`demo/bin/example.gdextension`文件的名称
-* 可以修改`demo/bin/example.gdextension`文件中的`entry_symbol`字段对应的内容,使其与你的GDExtension项目中`export "c"`块中的`GDExtensionBool GDE_EXPORT`修饰符的函数名称相匹配,这个决定了你的GDExtension的入口函数(或者说是加载函数),使其能够被Godot编辑器的C API加载
+* 可以修改`demo/bin/example.gdextension`文件中的`entry_symbol`字段对应的内容,使其与你的GDExtension项目中`export "c"`块中用`GDExtensionBool GDE_EXPORT`修饰的函数名称相匹配,这个决定了你的GDExtension的入口函数(或者说是加载函数),使其能够被Godot编辑器的C API加载
 * 在`register_types.cpp`文件中的初始化方法`initialize_gdextension_types`中, 可以使用`GDREGISTER_CLASS(CLASS_NAME);`来注册你自己实现的类
 
 ### 配置集成开发环境
